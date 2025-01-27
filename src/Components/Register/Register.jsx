@@ -1,7 +1,16 @@
 const Register = () => {
+    const handleRegister = (e) => {
+        e.preventDefault()
+        const name = e.target.name.value
+        const email = e.target.email.value
+        const photo = e.target.profileImage.value
+        const password = e.target.password.value
+        const confirmPassword = e.target.confirmPassword.value
+        console.log(name, email, photo, password, confirmPassword)
+    }
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-100">
-            <form className="w-full max-w-md p-6 bg-white rounded-2xl shadow-lg">
+            <form className="w-full max-w-md p-6 bg-white rounded-2xl shadow-lg" onSubmit={handleRegister}>
                 <h2 className="text-2xl font-bold text-center mb-6">Register</h2>
 
                 <div className="mb-4">
@@ -75,7 +84,7 @@ const Register = () => {
 
                 <button
                     type="submit"
-                    className="w-full py-2 px-4 bg-blue-500 text-white font-bold rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                    className="w-full py-2 px-4 bg-blue-500 text-white font-bold rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 cursor-pointer"
                 >
                     Register
                 </button>
