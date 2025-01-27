@@ -1,12 +1,23 @@
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import auth from "../Firebase/Firebase.config";
+
 const Register = () => {
     const handleRegister = (e) => {
         e.preventDefault()
         const name = e.target.name.value
         const email = e.target.email.value
-        const photo = e.target.profileImage.value
         const password = e.target.password.value
         const confirmPassword = e.target.confirmPassword.value
-        console.log(name, email, photo, password, confirmPassword)
+        console.log(name, email, password, confirmPassword)
+
+        // creating user with email address and password using firebase
+        createUserWithEmailAndPassword(auth, email, password)
+            .then(result => {
+                console.log(result.user)
+            })
+            .catch(error => {
+                console.log(error)
+            })
     }
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-100">
@@ -37,7 +48,7 @@ const Register = () => {
                     />
                 </div>
 
-                <div className="mb-4">
+                {/* <div className="mb-4">
                     <label
                         htmlFor="profileImage"
                         className="block text-sm font-medium text-gray-700"
@@ -50,7 +61,7 @@ const Register = () => {
                         name="profileImage"
                         className="file-input w-full file-input-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 border-gray-300"
                     />
-                </div>
+                </div> */}
 
                 <div className="mb-4">
                     <label
