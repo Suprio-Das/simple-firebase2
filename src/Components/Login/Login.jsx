@@ -1,6 +1,10 @@
 const Login = () => {
     const handleLogin = (e) => {
+        e.preventDefault()
+        const email = e.target.email.value
+        const password = e.target.password.value
 
+        console.log(email, password)
     }
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-100">
