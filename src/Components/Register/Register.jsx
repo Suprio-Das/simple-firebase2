@@ -4,6 +4,8 @@ import { useState } from "react";
 
 const Register = () => {
     const [errorMessage, setErrorMessage] = useState('')
+    const [success, setSuccess] = useState(false)
+
     const handleRegister = (e) => {
         e.preventDefault()
         const name = e.target.name.value
@@ -12,6 +14,7 @@ const Register = () => {
         console.log(name, email, password)
 
         setErrorMessage('');
+        setSuccess(false);
 
         if (password.length < 6) {
             setErrorMessage('Password must be at least 6 characters.')
@@ -22,10 +25,12 @@ const Register = () => {
         createUserWithEmailAndPassword(auth, email, password)
             .then(result => {
                 console.log(result.user)
+                setSuccess(true)
             })
             .catch(error => {
                 console.log(error)
                 setErrorMessage(error.message)
+                setSuccess(false)
             })
     }
     return (
@@ -95,6 +100,9 @@ const Register = () => {
                 </button>
                 {
                     errorMessage && <p className="text-red-600 my-2 text-center">{errorMessage}</p>
+                }
+                {
+                    success && <p className="text-green-600 my-2 text-center">Account created successfully!</p>
                 }
             </form>
         </div>
