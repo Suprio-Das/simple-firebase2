@@ -14,11 +14,16 @@ const Register = () => {
         const name = e.target.name.value
         const email = e.target.email.value
         const password = e.target.password.value
+        const terms = e.target.terms.checked
         console.log(name, email, password)
 
         setErrorMessage('');
         setSuccess(false);
 
+        if (!terms) {
+            setErrorMessage('Please accept terms and conditions.');
+            return;
+        }
 
         if (password.length < 6) {
             setErrorMessage('Password must be at least 6 characters.')
@@ -110,7 +115,10 @@ const Register = () => {
                         }
                     </p>
                 </div>
-
+                <div className="mb-3">
+                    <input type="checkbox" name="terms" className="checkbox" />
+                    <span className="ml-2">Accept Term and Conditions.</span>
+                </div>
                 <button
                     type="submit"
                     className="w-full py-2 px-4 bg-blue-500 text-white font-bold rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 cursor-pointer"
