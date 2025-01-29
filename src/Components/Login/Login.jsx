@@ -1,10 +1,23 @@
+import { signInWithEmailAndPassword } from "firebase/auth";
+import auth from "../Firebase/Firebase.config";
+
 const Login = () => {
+
     const handleLogin = (e) => {
         e.preventDefault()
         const email = e.target.email.value
         const password = e.target.password.value
 
-        console.log(email, password)
+        signInWithEmailAndPassword(auth, email, password)
+            .then(result => {
+                const user = result.user;
+                console.log(user)
+            })
+            .catch(error => {
+                console.log(error.message)
+            })
+
+        // console.log(email, password)
     }
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-100">
