@@ -1,11 +1,14 @@
 import { signInWithEmailAndPassword } from "firebase/auth";
 import auth from "../Firebase/Firebase.config";
+import { FaEye } from "react-icons/fa";
+import { FaEyeSlash } from "react-icons/fa";
 import { useState } from "react";
 import { Link } from "react-router";
 
 const Login = () => {
     const [success, setSuccess] = useState(false);
     const [errorMessage, setErrorMessage] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
     const handleLogin = (e) => {
         e.preventDefault()
         const email = e.target.email.value
@@ -42,7 +45,7 @@ const Login = () => {
                         className="mt-1 block w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 border-gray-300"
                     />
                 </div>
-                <div className="mb-4">
+                <div className="mb-4 relative">
                     <label
                         htmlFor="password"
                         className="block text-sm font-medium text-gray-700"
@@ -50,11 +53,19 @@ const Login = () => {
                         Password
                     </label>
                     <input
-                        type="password"
+                        type={showPassword ? "text" : "password"}
                         id="password"
                         name="password"
                         className="mt-1 block w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 border-gray-300"
                     />
+                    <p
+                        className="btn bg-white shadow-none outline-0 border-0 btn-xs absolute left-[370px] top-[33px]"
+                        onClick={() => setShowPassword(!showPassword)}
+                    >
+                        {
+                            showPassword ? <FaEyeSlash></FaEyeSlash> : <FaEye></FaEye>
+                        }
+                    </p>
                 </div>
                 <button
                     type="submit"
