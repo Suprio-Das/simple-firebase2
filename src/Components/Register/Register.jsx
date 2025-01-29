@@ -4,6 +4,7 @@ import { useState } from "react";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
 
+
 const Register = () => {
     const [errorMessage, setErrorMessage] = useState('')
     const [success, setSuccess] = useState(false)
@@ -131,6 +132,8 @@ const Register = () => {
                 {
                     success && <p className="text-green-600 my-2 text-center">Account created successfully!</p>
                 }
+
+
             </form>
         </div>
     );
