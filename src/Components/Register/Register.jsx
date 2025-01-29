@@ -16,8 +16,16 @@ const Register = () => {
         setErrorMessage('');
         setSuccess(false);
 
+
         if (password.length < 6) {
             setErrorMessage('Password must be at least 6 characters.')
+            return;
+        }
+
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).+$/;
+
+        if (!passwordRegex.test(password)) {
+            setErrorMessage('Give a valid password. Example: Test123@');
             return;
         }
 
