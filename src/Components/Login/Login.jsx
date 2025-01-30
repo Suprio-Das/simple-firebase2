@@ -1,14 +1,16 @@
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { sendPasswordResetEmail, signInWithEmailAndPassword } from "firebase/auth";
 import auth from "../Firebase/Firebase.config";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Link } from "react-router";
 
 const Login = () => {
     const [success, setSuccess] = useState(false);
     const [errorMessage, setErrorMessage] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
+    const emailRef = useRef();
+
     const handleLogin = (e) => {
         e.preventDefault()
         const email = e.target.email.value
@@ -35,6 +37,23 @@ const Login = () => {
 
         // console.log(email, password)
     }
+
+    const handleResetPassword = () => {
+        sendPasswordResetEmail(auth, auth.currentUser);
+        const email = emailRef.current.value;
+        if (!email) {
+            alert('Please provide a valid email.')
+        }
+        else {
+            sendPasswordResetEmail(auth, email)
+                .then(() => {
+                    alert('A Password reset email send to your inbox.')
+                })
+                .catch(error => {
+                    console.log(error.message)
+                })
+        }
+    }
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-100">
             <form className="w-full max-w-md p-6 bg-white rounded-2xl shadow-lg" onSubmit={handleLogin}>
@@ -47,6 +66,7 @@ const Login = () => {
                         type="email"
                         id="email"
                         name="email"
+                        ref={emailRef}
                         className="mt-1 block w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 border-gray-300"
                     />
                 </div>
@@ -71,6 +91,7 @@ const Login = () => {
                             showPassword ? <FaEyeSlash></FaEyeSlash> : <FaEye></FaEye>
                         }
                     </p>
+                    <p className="text-xs text-right text-blue-400 hover:underline cursor-pointer" onClick={handleResetPassword}>Forget Password</p>
                 </div>
                 <button
                     type="submit"
