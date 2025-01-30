@@ -50,7 +50,7 @@ const Register = () => {
                         alert('A verification email sent to inbox')
                     })
                     .catch((error) => {
-                        console.log(error.message);
+                        console.log(error.message)
                     })
 
             })
